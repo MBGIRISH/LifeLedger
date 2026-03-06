@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "419026102813",
+    "project_id": "java-app-aede7",
+    "storage_bucket": "java-app-aede7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419026102813:android:c3d2487c288c56f7a2f4f4",
+        "android_client_info": {
+          "package_name": "com.passfamily"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "419026102813-bha5nr2affkhb3qhv882t9pjei8i49dg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.passfamily",
+            "certificate_hash": "385030959c67525fc16139bc20769663facbe6c8"
+          }
+        },
+        {
+          "client_id": "419026102813-kv5g0o6vj1hm567d2s2b0si4jpovlpq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjUR5ovgCpIv1Be0GZNnFKRkgiR6Pf3H0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "419026102813-kv5g0o6vj1hm567d2s2b0si4jpovlpq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

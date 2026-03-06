@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Personal Diary</string>
+    <string name="app_tagline">Record your life, one day at a time</string>
+
+    <!-- Team Info -->
+    <string name="team_title">Developed By</string>
+    <string name="team_member_1">Girish M B</string>
+    <string name="college_name">Your College Name</string>
+
+    <!-- Auth -->
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="logout">Logout</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="no_account">Don\'t have an account? Sign Up</string>
+    <string name="have_account">Already have an account? Login</string>
+
+    <!-- Google Sign-In (default_web_client_id is auto-generated from google-services.json) -->
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="or_divider">OR</string>
+
+    <!-- Home -->
+    <string name="todays_diary">Today\'s Diary</string>
+    <string name="diary_for_date">Diary for %s</string>
+    <string name="change_date">Change Date</string>
+    <string name="go_to_today">Today</string>
+    <string name="write_here">Write about your day…</string>
+    <string name="save_note">Save Note</string>
+    <string name="search_notes">Search Notes</string>
+    <string name="tag">Tag</string>
+    <string name="select_tag">Select Tag</string>
+
+    <!-- Tags -->
+    <string name="tag_normal">NORMAL</string>
+    <string name="tag_special">SPECIAL</string>
+    <string name="tag_important">IMPORTANT</string>
+    <string name="tag_bad_news">BAD NEWS</string>
+
+    <!-- Search -->
+    <string name="search">Search</string>
+    <string name="search_by_date">By Date</string>
+    <string name="search_by_month">By Month</string>
+    <string name="search_by_tag">By Tag</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_month">Select Month</string>
+    <string name="select_year">Select Year</string>
+    <string name="no_note_found">No diary entry found for this date.</string>
+    <string name="no_notes_found">No diary entries found.</string>
+    <string name="edit_note">Edit &amp; Save</string>
+    <string name="search_month_notes">Search</string>
+
+    <!-- Attachments -->
+    <string name="attach">Attach</string>
+    <string name="attach_image">Image</string>
+    <string name="attach_document">Document</string>
+    <string name="attach_audio">Audio</string>
+    <string name="attach_video">Video</string>
+    <string name="choose_attachment">Add Attachment</string>
+    <string name="uploading_attachment">Uploading attachment…</string>
+    <string name="attachment_uploaded">Attachment added!</string>
+    <string name="attachment_count">%d attachment(s)</string>
+    <string name="no_attachments">No attachments</string>
+
+    <!-- On This Day Memory -->
+    <string name="on_this_day">On This Day</string>
+    <string name="one_year_ago">1 Year Ago</string>
+    <string name="memory_title">On This Day — 1 Year Ago</string>
+
+    <!-- General -->
+    <string name="home">Home</string>
+    <string name="loading">Loading…</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+    <string name="success">Success</string>
+    <string name="network_error">Network error. Please check your connection.</string>
+    <string name="password_reset_sent">Password reset email sent. Check your inbox.</string>
+    <string name="note_saved">Diary note saved successfully!</string>
+    <string name="note_updated">Diary note updated successfully!</string>
+    <string name="created">Created: %s</string>
+    <string name="updated">Updated: %s</string>
+
+    <!-- Validation -->
+    <string name="error_empty_name">Please enter your full name</string>
+    <string name="error_empty_email">Please enter your email</string>
+    <string name="error_invalid_email">Please enter a valid email address</string>
+    <string name="error_empty_password">Please enter your password</string>
+    <string name="error_password_length">Password must be at least 8 characters</string>
+    <string name="error_password_uppercase">Password must contain an uppercase letter</string>
+    <string name="error_password_number">Password must contain a number</string>
+    <string name="error_password_special">Password must contain a special character</string>
+    <string name="error_passwords_mismatch">Passwords do not match</string>
+    <string name="error_empty_note">Please write something in your diary</string>
+    <string name="error_google_sign_in">Google Sign-In failed. Please try again.</string>
+
+    <!-- Month names array -->
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+</resources>

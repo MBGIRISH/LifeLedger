@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.HomeActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/white"
+            app:menu="@menu/top_menu" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="16dp">
+
+            <!-- On This Day Memory Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardMemory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeColor="#FF6F00"
+                app:strokeWidth="1dp"
+                app:contentPadding="12dp"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_memory"
+                            android:contentDescription="@string/on_this_day" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/memory_title"
+                            android:textColor="#FF6F00"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipMemoryTag"
+                            style="@style/Widget.Material3.Chip.Assist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:clickable="false"
+                            android:textSize="10sp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvMemoryDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="11sp"
+                        tools:text="March 6, 2025" />
+
+                    <TextView
+                        android:id="@+id/tvMemoryContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:maxLines="5"
+                        android:ellipsize="end"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="13sp"
+                        tools:text="A year ago you wrote: Today was a wonderful day…" />
+
+                    <TextView
+                        android:id="@+id/tvMemoryAttachments"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="11sp"
+                        android:visibility="gone"
+                        tools:text="3 attachment(s)" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMemoryAttachments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingEnd="4dp"
+                        android:overScrollMode="never"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Date Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="1dp"
+                app:contentPadding="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="?attr/colorPrimary"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                tools:text="Friday, March 6, 2026" />
+
+                            <TextView
+                                android:id="@+id/tvDiaryTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="@string/todays_diary"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnChangeDate"
+                            style="@style/Widget.Material3.Button.TonalButton.Icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:contentDescription="@string/change_date"
+                            app:icon="@android:drawable/ic_menu_my_calendar"
+                            app:iconGravity="textStart"
+                            app:iconPadding="0dp"
+                            app:cornerRadius="20dp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnToday"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="@string/go_to_today"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Note + Attachments Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="1dp"
+                app:contentPadding="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilNote"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/write_here">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etNote"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|start"
+                            android:inputType="textMultiLine"
+                            android:minLines="6"
+                            android:scrollbars="vertical" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Attach button row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAttach"
+                            style="@style/Widget.Material3.Button.TonalButton.Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:text="@string/attach"
+                            android:textSize="12sp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            app:icon="@drawable/ic_attach"
+                            app:iconSize="18dp"
+                            app:cornerRadius="18dp" />
+
+                        <TextView
+                            android:id="@+id/tvAttachCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <ProgressBar
+                            android:id="@+id/progressUpload"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <!-- Attachments preview (visual) -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvAttachments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:clipToPadding="false"
+                        android:paddingEnd="4dp"
+                        android:overScrollMode="never"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <!-- Tags section -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/tag"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroupTags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        app:singleSelection="true"
+                        app:selectionRequired="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipNormal"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/tag_normal" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipSpecial"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tag_special" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipImportant"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tag_important" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipBadNews"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tag_bad_news" />
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                    <TextView
+                        android:id="@+id/tvTimestamps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="11sp"
+                        android:visibility="gone"
+                        tools:text="Created: Mar 6, 2026 10:00 AM\nUpdated: Mar 6, 2026 11:30 AM"
+                        tools:visibility="visible" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/save_note"
+                android:textSize="15sp"
+                app:cornerRadius="12dp"
+                app:icon="@android:drawable/ic_menu_save"
+                app:iconGravity="textStart" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
