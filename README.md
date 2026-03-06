@@ -1,219 +1,247 @@
-# Personal Diary - Android Application
+# Personal Diary (LifeLedger) — Android (Java + MVVM + Firebase)
 
-A secure, production-ready Android diary application built with Java, MVVM architecture, and Firebase backend. Users can record daily life events, search entries by date/month/tag, and modify them later. **Diary notes can never be deleted.**
+A secure Android diary app built with **Java**, **MVVM**, and **Firebase**. Users can write diary notes for **any date**, attach files (images/documents/audio/video), search by date/month/tag, and update entries later.
+
+**Hard rule:** diary notes must **never** be deleted (enforced by Firestore Security Rules).
 
 ## Team
 
-- **Developer:** Girish M B
-- **College:** Your College Name
+- **Developer**: Girish M B  
+- **College**: Dayananda Sagar College of Engineering
 
 ---
 
-## Tech Stack
+## Tech stack
 
-| Component       | Technology                  |
-|-----------------|-----------------------------|
-| Language        | Java                        |
-| Architecture    | MVVM                        |
-| Backend         | Firebase                    |
-| Database        | Cloud Firestore             |
-| Authentication  | Firebase Authentication     |
-| UI              | Material Design 3           |
-| Build System    | Gradle 8.4 / AGP 8.2.2     |
-| Min SDK         | 24 (Android 7.0)            |
-| Target SDK      | 35                          |
+- **Language**: Java
+- **Architecture**: MVVM (ViewModel + LiveData + Repository)
+- **UI**: Material Design 3 + ViewBinding + RecyclerView
+- **Backend**: Firebase
+  - **Auth**: Email/Password + Google Sign‑In
+  - **Database**: Cloud Firestore
+  - **Files**: Firebase Storage (attachments)
+- **Min SDK**: 24
+- **Compile/Target SDK**: 36
+- **Build**: Gradle Wrapper (8.9) + Android Gradle Plugin (8.7.x)
+
+---
+
+## Package name (Google Play)
+
+The **applicationId (package name)** used for Play Store uploads is:
+
+- **`com.passfamily`**
+
+> Note: Source code package remains `com.personaldiary` (this is normal; `applicationId` is what matters for Play Store uniqueness).
 
 ---
 
 ## Features
 
-- **Splash Screen** with AndroidX SplashScreen API
-- **User Authentication** — Email/Password login & signup with strong password policy
-- **Forgot Password** — Firebase password reset email
-- **Daily Diary** — Write/edit today's diary entry
-- **Auto-load** — Existing entries load automatically for editing
-- **Note Tagging** — NORMAL, SPECIAL, IMPORTANT, BAD_NEWS
-- **Search by Date** — Pick a date, view & edit that day's entry
-- **Search by Month** — View all entries for a month (read-only list)
-- **Search by Tag** — View all entries with a specific tag (read-only list)
-- **Timestamps** — Server-side created/updated timestamps displayed on entries
-- **Material Design 3** — Modern UI with light/dark theme support
-- **Security** — Firestore rules enforce per-user data isolation; delete is forbidden
+- **Auth**
+  - Email/Password signup + login
+  - Strong password policy
+  - Forgot password (reset email)
+  - Google Sign‑In
+
+- **Diary**
+  - Write for **any specific date** (future dates disabled in picker)
+  - Notes can be **empty** and still saved/updated
+  - Tags: `NORMAL`, `SPECIAL`, `IMPORTANT`, `BAD_NEWS`
+  - Created/Updated timestamps
+
+- **Attachments (WhatsApp-style)**
+  - Attach **images, documents, audio, video**
+  - Upload to **Firebase Storage**
+  - Display as **thumbnails / file tiles** on:
+    - Home screen (current day note)
+    - Search results list (Month/Tag)
+    - Search by Date result
+
+- **Search**
+  - By **Date** (view + edit)
+  - By **Month + Year** (read‑only list)
+  - By **Tag** (read‑only list)
+
+- **Memories**
+  - **On This Day (1 year ago)** card shown on Home screen when a note exists for the same date last year
+
+- **Security**
+  - Users can read/write only their own notes
+  - **Delete is blocked** at Firestore rules level
 
 ---
 
-## Project Structure
+## App screens
+
+- `MainActivity`: Welcome screen (Login/Signup + credits)
+- `LoginActivity`: Email/Password login + Google Sign‑In + Forgot Password
+- `SignupActivity`: Registration + Google Sign‑In
+- `HomeActivity`: Create/update note for selected date + attachments + “On This Day”
+- `SearchActivity`: Search by Date/Month/Tag
+- `MonthNotesActivity`: RecyclerView list for Month/Tag results
+
+---
+
+## Project structure
 
 ```
 com.personaldiary
-├── activities/          # All Activity classes
-│   ├── MainActivity     # Welcome/splash screen
-│   ├── LoginActivity    # Email + password login
-│   ├── SignupActivity   # User registration
-│   ├── HomeActivity     # Main diary screen
-│   ├── SearchActivity   # Search by date/month/tag
-│   └── MonthNotesActivity # RecyclerView list of notes
+├── activities/
 ├── adapters/
-│   └── DiaryNoteAdapter # RecyclerView adapter with ViewBinding
-├── models/
-│   ├── User             # User data model
-│   └── DiaryNote        # Diary note data model
-├── repository/
-│   ├── AuthRepository   # Firebase Auth operations
-│   └── DiaryRepository  # Firestore diary CRUD operations
-├── viewmodel/
-│   ├── AuthViewModel    # Auth state management
-│   └── DiaryViewModel   # Diary data management
 ├── firebase/
-│   └── FirebaseConfig   # Singleton Firebase instances
-└── utils/
-    ├── Constants        # App-wide constants
-    ├── ValidationUtils  # Email & password validation
-    └── DateUtils        # Date formatting utilities
+├── models/
+├── repository/
+├── utils/
+└── viewmodel/
 ```
 
 ---
 
-## Firestore Data Structure
+## Firestore schema
 
-### Users Collection
+### Users
 
 ```
 users/{userId}
-├── name: String
-├── email: String
-└── createdAt: Timestamp
+  name: string
+  email: string
+  createdAt: timestamp
 ```
 
-### Diary Notes Collection
+### Diary notes (by date)
+
+Document ID is the **date** in storage format: `yyyy-MM-dd`
 
 ```
 diary_notes/{userId}/notes/{date}
-├── content: String
-├── tag: String ("NORMAL" | "SPECIAL" | "IMPORTANT" | "BAD_NEWS")
-├── date: String ("yyyy-MM-dd")
-├── createdAt: Timestamp
-└── updatedAt: Timestamp
+  content: string
+  tag: string
+  date: string
+  createdAt: timestamp
+  updatedAt: timestamp
+  attachments: [
+    { url: string, name: string, type: string }
+  ]
 ```
+
+`type` is one of: `image | document | audio | video`
 
 ---
 
-## Setup Instructions
+## Firebase setup (required)
 
-### Prerequisites
+### 1) Add Android app in Firebase
 
-- Android Studio Hedgehog (2023.1.1) or later
-- Java 17
-- Firebase account
+Firebase Console → Project Settings → Your Apps → Add app (Android)
 
-### Step 1: Clone & Open
+- **Package name**: `com.passfamily`
+- Add **SHA‑1** for:
+  - Debug keystore (for local testing)
+  - Release keystore (for Play Store builds)
 
-```bash
-git clone <repository-url>
-```
+Download the generated `google-services.json` and place it here:
 
-Open the project folder in Android Studio.
+- `app/google-services.json`
 
-### Step 2: Firebase Setup
+### 2) Enable Authentication methods
 
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project (or use existing project `java-app-aede7`)
-3. Add an Android app with package name: **`com.personaldiary`**
-4. Download the generated `google-services.json`
-5. Replace `app/google-services.json` with your downloaded file
+Firebase Console → Authentication → Sign‑in method:
 
-### Step 3: Enable Firebase Services
+- Enable **Email/Password**
+- Enable **Google**
 
-In the Firebase Console:
+### 3) Enable Firestore
 
-1. **Authentication** → Sign-in method → Enable **Email/Password**
-2. **Firestore Database** → Create database → Start in **production mode**
+Firebase Console → Firestore Database → Create database  
+Use **Production mode** (recommended).
 
-### Step 4: Deploy Firestore Security Rules
+### 4) Enable Storage (for attachments)
 
-Copy the contents of `firestore.rules` and paste them in:
-Firebase Console → Firestore Database → Rules tab → Publish
+Firebase Console → Storage → Get started
 
-### Step 5: Create Firestore Indexes
+### 5) Deploy Security Rules
 
-The app uses these queries that may require composite indexes. Firestore will prompt you to create them automatically (check Logcat for index creation links):
+- Firestore Rules: copy/paste `firestore.rules` into Firestore → Rules → Publish
+- Storage Rules: copy/paste `storage.rules` into Storage → Rules → Publish
 
-1. **Month search:** `notes` subcollection, fields: `date ASC`
-2. **Tag search:** `notes` subcollection, field: `tag`
+> Storage rules enforce per-user access under `attachments/{userId}/...`.
 
-If prompted in Logcat, click the provided URL to create the index automatically.
+### 6) Indexes
 
-### Step 6: Build & Run
+If Firestore asks for indexes (Logcat provides links), create them.
+
+Common queries:
+- Month search by `date` (range + order)
+- Tag search by `tag`
+
+---
+
+## Build & run
+
+### Android Studio
+
+Open the project in Android Studio and press **Run**.
+
+### Command line
 
 ```bash
 ./gradlew assembleDebug
 ```
 
-Or press **Run** in Android Studio.
+---
+
+## Password policy
+
+Passwords must include:
+
+- Min **8** characters
+- At least **1 uppercase** letter
+- At least **1 number**
+- At least **1 special character**
 
 ---
 
-## Password Policy
+## Release / Play Store
 
-Passwords must meet ALL of the following:
+### Build release APK
 
-- Minimum 8 characters
-- At least one uppercase letter
-- At least one number
-- At least one special character (`!@#$%^&*()` etc.)
+```bash
+./gradlew assembleRelease
+```
 
----
+### Build release AAB (Play Store upload)
 
-## Firestore Security Rules Summary
+```bash
+./gradlew bundleRelease
+```
 
-| Collection | Operation | Rule |
-|---|---|---|
-| `users/{uid}` | Read/Write | Only if `auth.uid == uid` |
-| `diary_notes/{uid}/notes/{noteId}` | Read | Only if `auth.uid == uid` |
-| `diary_notes/{uid}/notes/{noteId}` | Create/Update | Only if `auth.uid == uid` |
-| `diary_notes/{uid}/notes/{noteId}` | **Delete** | **ALWAYS DENIED** |
+Upload the generated `.aab` from:
 
----
+- `app/build/outputs/bundle/release/app-release.aab`
 
-## Release Build
+### Notes
 
-### Generate Signed APK
-
-1. In Android Studio: Build → Generate Signed Bundle / APK
-2. Create a new keystore or use an existing one
-3. Select **release** build type
-4. The signed APK will be in `app/release/`
-
-### ProGuard
-
-ProGuard rules are configured in `app/proguard-rules.pro`. The release build automatically enables:
-- Code minification (`minifyEnabled true`)
-- Resource shrinking (`shrinkResources true`)
+- Package name must be unique on Play Store → this project uses **`com.passfamily`**.
+- Keep `local.properties` **out of git** (it contains machine-specific paths/secrets).
 
 ---
 
-## Screens
+## Non-deletable notes rule
 
-| Screen | Description |
-|---|---|
-| `MainActivity` | Welcome screen with Login/Signup buttons, team info |
-| `LoginActivity` | Email + password login, forgot password |
-| `SignupActivity` | Registration with full validation |
-| `HomeActivity` | Today's diary entry, tag selection, save |
-| `SearchActivity` | Search by date (editable), month, or tag |
-| `MonthNotesActivity` | Read-only RecyclerView of diary entries |
+Diary notes must never be deleted. This is enforced by:
+
+- Firestore security rule: `allow delete: if false;`
 
 ---
 
-## Important Rules
+## Troubleshooting
 
-1. **Diary notes can NEVER be deleted** — enforced both in app logic and Firestore security rules
-2. Users can only access their own data
-3. All timestamps use Firestore server timestamps
-4. Today's note auto-loads for editing if it already exists
+- **Google Sign‑In fails**: make sure SHA‑1 is added in Firebase and the correct `google-services.json` for `com.passfamily` is placed in `app/`.
+- **Attachments not uploading**: ensure Firebase Storage is enabled and `storage.rules` are published.
 
 ---
 
 ## License
 
-This project is for educational purposes.
+Educational project.

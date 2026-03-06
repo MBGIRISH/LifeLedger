@@ -6,7 +6,7 @@
     <!-- Team Info -->
     <string name="team_title">Developed By</string>
     <string name="team_member_1">Girish M B</string>
-    <string name="college_name">Your College Name</string>
+    <string name="college_name">Dayananda Sagar College of Engineering</string>
 
     <!-- Auth -->
     <string name="login">Login</string>
