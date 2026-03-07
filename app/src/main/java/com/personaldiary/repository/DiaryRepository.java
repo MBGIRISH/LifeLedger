@@ -34,9 +34,9 @@ public class DiaryRepository {
     }
 
     private com.google.firebase.firestore.CollectionReference getNotesCollection() {
-        return db.collection(Constants.COLLECTION_DIARY_NOTES)
+        return db.collection(Constants.COLLECTION_USERS)
                 .document(userId)
-                .collection(Constants.SUBCOLLECTION_NOTES);
+                .collection(Constants.COLLECTION_DIARY_NOTES);
     }
 
     public Task<DocumentSnapshot> getNote(String date) {

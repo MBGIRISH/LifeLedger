@@ -14,9 +14,9 @@ service cloud.firestore {
                     && request.resource.data.email is string;
     }
 
-    // Diary notes: users can only access their own notes
+    // Diary notes: users can only access their own notes as a sub-collection of users
     // IMPORTANT: Notes can NEVER be deleted
-    match /diary_notes/{userId}/notes/{noteId} {
+    match /users/{userId}/diary_notes/{noteId} {
       allow read: if request.auth != null && request.auth.uid == userId;
 
       allow create: if request.auth != null
