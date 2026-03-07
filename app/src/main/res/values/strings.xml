@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Personal Diary</string>
+    <string name="app_name">LifeLedger</string>
     <string name="app_tagline">Record your life, one day at a time</string>
 
     <!-- Team Info -->
     <string name="team_title">Developed By</string>
     <string name="team_member_1">Girish M B</string>
-    <string name="college_name">Your College Name</string>
+    <string name="college_name">Dayananda Sagar College of Engineering</string>
 
     <!-- Auth -->
     <string name="login">Login</string>
